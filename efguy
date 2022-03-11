@@ -41,7 +41,7 @@ void drop_disc(char Board[ROWS][COLUMNS], int column, char disc)
     }
 }
 
-int main(void)
+/*int main(void)
 {
     char Board[ROWS][COLUMNS] = {
                                 {' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -52,20 +52,25 @@ int main(void)
                                 {' ', ' ', ' ', ' ', ' ', ' ', ' '}
                                 };
     int column;
-    char disc = '*';
+    char disc;
+    printf("Enter player1's disc: ");
+    scanf("%c",&disc);  
     while (1)
-    {                   
+    {                 
         printf("\nEnter the column between [1-7] where you want to mark: ");
         scanf("%d",&column);
-        drop_disc(Board,column,'*');
-        print_board(Board);
+        //drop_disc(Board,column,'*');
         if (disc == '*')
         {
+            //disc = 'o';
+            drop_disc(Board,column,disc);
             disc = 'o';
         }
         else
         {
+            drop_disc(Board,column,disc);
             disc = '*';
         }
+        print_board(Board);
     }
-}
+}*/
