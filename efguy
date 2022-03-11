@@ -41,7 +41,7 @@ void drop_disc(char Board[ROWS][COLUMNS], int column, char disc)
     }
 }
 
-/*int main(void)
+int main(void)
 {
     char Board[ROWS][COLUMNS] = {
                                 {' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -60,6 +60,16 @@ void drop_disc(char Board[ROWS][COLUMNS], int column, char disc)
         printf("\nEnter the column between [1-7] where you want to mark: ");
         scanf("%d",&column);
         //drop_disc(Board,column,'*');
+        while(1){
+        if(column<1 || column>7){
+            printf("Column %d doesn't exist.Enter another column between [1-7] where you want to mark: ",column);
+            scanf("%d",&column);
+        }
+        else{
+            break;
+        }
+
+        }
         if (disc == '*')
         {
             //disc = 'o';
@@ -73,4 +83,4 @@ void drop_disc(char Board[ROWS][COLUMNS], int column, char disc)
         }
         print_board(Board);
     }
-}*/
+}
