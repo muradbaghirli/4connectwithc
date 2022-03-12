@@ -16,11 +16,6 @@ void drop_disc(char Board[ROWS][COLUMNS], int column, char disc)
     */
     for (int row = ROWS-1; row > -1; row--)
     {
-       /* if (Board[row][column-1] == ' ' && possible_play(Board,column))
-        {
-            Board[row][column-1] = disc;
-            break;
-        }*/
         if (possible_play(Board,column))
         {
             if (Board[row][column-1] == ' ')
@@ -59,7 +54,6 @@ int main(void)
     {                 
         printf("\nEnter the column between [1-7] where you want to mark: ");
         scanf("%d",&column);
-        //drop_disc(Board,column,'*');
         while(1){
         if(column<1 || column>7){
             printf("Column %d doesn't exist.Enter another column between [1-7] where you want to mark: ",column);
@@ -72,7 +66,6 @@ int main(void)
         }
         if (disc == '*')
         {
-            //disc = 'o';
             drop_disc(Board,column,disc);
             disc = 'o';
         }
