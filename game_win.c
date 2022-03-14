@@ -1,3 +1,19 @@
+#include <stdio.h>
+#include <stdbool.h>
+//#include "pw4_ex3.c"
+
+#define ROWS 6
+#define COLUMNS 7
+
+char Board[ROWS][COLUMNS] = {
+                            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                            {' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                            {' ', ' ', ' ', ' ', ' ', ' ', ' '}
+                            };
+
 bool horizWin(char Board[ROWS][COLUMNS])
 {
     /*
