@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "pw4_ex3.c"
-#include "pw4_ex4.c"
-#include "pw4_ex5.c"
+//#include "pw4_ex3.c"
+//#include "pw4_ex4.c"
+//#include "pw4_ex5.c"
 
 #define ROWS 6
 #define COLUMNS 7
@@ -135,7 +135,7 @@ void count_aligned_disc(char Board[ROWS][COLUMNS])
     }
 }
 
-int main(void)
+/*int main(void)
 {
     char Board[ROWS][COLUMNS] = {
                                 {' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -147,7 +147,7 @@ int main(void)
                                 };
     int column;
     char disc;
-    printf("Enter player1's disc: ");
+    printf("Enter the first player's disc: ");
     scanf("%c",&disc);  
     while (1)
     {                 
@@ -179,4 +179,4 @@ int main(void)
         printf("\n");
         count_aligned_disc(Board);
     }
-}
+}*/
