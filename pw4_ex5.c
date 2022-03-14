@@ -1,6 +1,5 @@
 #include <stdio.h>
-#include "pw4_ex3.c"
-#include "pw4_ex4.c"
+//#include "pw4_ex4.c"
 
 #define ROWS 6
 #define COLUMNS 7
@@ -24,6 +23,7 @@ void drop_disc(char Board[ROWS][COLUMNS], int column, char disc)
                 break;
             }
         }
+
         else
         {
             printf("Column %d has filled. Please enter another number.",column);
@@ -34,9 +34,10 @@ void drop_disc(char Board[ROWS][COLUMNS], int column, char disc)
             break;
         }
     }
+    
 }
 
-int main(void)
+/*int main(void)
 {
     char Board[ROWS][COLUMNS] = {
                                 {' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -48,21 +49,23 @@ int main(void)
                                 };
     int column;
     char disc;
-    printf("Enter player1's disc: ");
+    printf("Enter the first player's disc: ");
     scanf("%c",&disc);  
     while (1)
     {                 
         printf("\nEnter the column between [1-7] where you want to mark: ");
         scanf("%d",&column);
-        while(1){
-        if(column<1 || column>7){
-            printf("Column %d doesn't exist.Enter another column between [1-7] where you want to mark: ",column);
-            scanf("%d",&column);
-        }
-        else{
-            break;
-        }
-
+        while (1)
+        {
+            if(column<1 || column>7)
+            {
+                printf("Column %d doesn't exist.Enter another column between [1-7] where you want to mark: ",column);
+                scanf("%d",&column);
+            }
+            else
+            {
+                break;
+            }
         }
         if (disc == '*')
         {
@@ -76,4 +79,4 @@ int main(void)
         }
         print_board(Board);
     }
-}
+}*/
