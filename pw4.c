@@ -407,9 +407,9 @@ void improve_advice(char disc)
                 }
                 else if (Board[i][j] == Board[i][j-1])
                 {
-                    if (left_horizontal == 3 || j <= 2)
+                    if (j <= 2)
                         continue;
-                    else if (i == ROWS-1 && Board[i][j-2] == ' ')
+                    else if (i == ROWS-1 && Board[i][j-2] == ' ' && (Board[i][j+3] == ' ' || Board[i][j+3] == disc))
                     {
                         left_horizontal = 2;
                         printf("Player %c should play the column %d\n",disc,j-1);
@@ -437,9 +437,9 @@ void improve_advice(char disc)
                 }
                 else if (Board[i][j] == Board[i][j+1])
                 {
-                    if (right_horizontal == 3 || j >= 4)
+                    if (j >= 4)
                         continue;
-                    else if (i == ROWS-1 && Board[i][j+2] == ' ')
+                    else if (i == ROWS-1 && Board[i][j+2] == ' ' && (Board[i][j+3] == ' ' || Board[i][j+3] == disc))
                     {
                         right_horizontal = 2;
                         printf("Player %c should play the column %d\n",disc,j+3);
@@ -459,8 +459,10 @@ void improve_advice(char disc)
                 }
                 else if (Board[i][j] == Board[i-1][j])
                 {
-                    if (up_vertical == 3 || Board[i-2][j] != ' ')
+                    if (Board[i-2][j] != ' ')
+                    {
                         continue;
+                    }
                     up_vertical = 2;
                     printf("Player %c should play the column %d\n",disc,j+1);
                 }
@@ -476,7 +478,7 @@ void improve_advice(char disc)
                 }
                 else if (Board[i][j] == Board[i-1][j+1])
                 {
-                    if (right_up_diagonal == 3 || i <= 2 || j >= 4)
+                    if (i <= 2 || j >= 4)
                         continue;
                     else if (Board[i-1][j+2] != ' ')
                     {
@@ -496,7 +498,7 @@ void improve_advice(char disc)
                 }
                 else if (Board[i][j] == Board[i+1][j-1])
                 {
-                    if (left_down_diagonal == 3 || i >= 3 || j <= 2)
+                    if (i >= 3 || j <= 2)
                         continue;
                     else if (Board[i+1][j-2] != ' ')
                     {
@@ -516,7 +518,7 @@ void improve_advice(char disc)
                 }
                 else if (Board[i][j] == Board[i-1][j-1])
                 {
-                    if (left_up_diagonal == 3 || i <= 2 || j <= 2)
+                    if (i <= 2 || j <= 2)
                         continue;
                     else if (Board[i-1][j-2] != ' ')
                     {
@@ -536,7 +538,7 @@ void improve_advice(char disc)
                 }
                 else if (Board[i][j] == Board[i+1][j+1])
                 {
-                    if (right_down_diagonal == 3 || i >= 3 || j >= 4)
+                    if (i >= 3 || j >= 4)
                         continue;
                     else if (Board[i+1][j+2] != ' ')
                     {
