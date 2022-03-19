@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <stdbool.h>
 
 //Group members: 
@@ -124,7 +125,7 @@ void drop_disc(int column, char disc)
 }
 //---------------------------------------------------------------//
 
-// Exercise 6 was written by Nihat Babayev
+// Exercise 6 was written by Nihat Babayev and Ismayil Abdullazada
 void count_aligned_disc()
 {
     int left_horizontal, right_horizontal, up_vertical, right_up_diagonal, left_down_diagonal, left_up_diagonal, right_down_diagonal;
@@ -254,10 +255,8 @@ bool horizWin()
             {
                 if (Board[row][col] == Board[row][col+1] && Board[row][col] == Board[row][col+2] && Board[row][col] == Board[row][col+3])
                 {
-                   printf("\n");
-                   printf("Player %c has won the game!",Board[row][col]);
-                   printf("\n");
-                   printf("Game Over!");
+                   printf("\nPlayer %c has won the game!\n",Board[row][col]);
+                   printf("Game Over!\n");
                    return true; 
                 }
             }
@@ -282,10 +281,8 @@ bool vertWin()
             {
                 if (Board[row][col] == Board[row+1][col] && Board[row][col] == Board[row+2][col] && Board[row][col] == Board[row+3][col])
                 {
-                   printf("\n");
-                   printf("Player %c has won!",Board[row][col]);
-                   printf("\n");
-                   printf("Game Over!");
+                   printf("\nPlayer %c has won!\n",Board[row][col]);
+                   printf("Game Over!\n");
                    return true;
                 }
             }
@@ -312,10 +309,8 @@ bool diagWin()
             {
                 if (Board[row][col] == Board[row-1][col+1] && Board[row][col] == Board[row-2][col+2] && Board[row][col] == Board[row-3][col+3])
                 {
-                   printf("\n");
-                   printf("Player %c has won!",Board[row][col]);
-                   printf("\n");
-                   printf("Game Over!");
+                   printf("\nPlayer %c has won!\n",Board[row][col]);
+                   printf("Game Over!\n");
                    return true;
                 }
             }
@@ -343,7 +338,7 @@ bool diagWin()
     return false;
 }
 
- // Was written by Nijat Zeynalli  
+// Was written by Nijat Zeynalli  
 bool Win()
 {
     /*
@@ -360,20 +355,23 @@ bool Win()
 //---------------------------------------------------------------//
 
 // Exercise 7 was written by Murad Baghirli
-void recommend_random_column(int column)
+void recommend_random_column(char disc)
 {
+    int column;
+    srand(time(0));
     column = 1 + rand() % 7;
     if (possible_play(column) == 1)
     {
-        printf("You should play the column %d\n",column);
+        printf("Player '%c' should play the column %d\n",disc,column);
     }
     else
     {
         do
         {
+            srand(time(0));
             column = 1 + rand() % 7;
         } while (possible_play(column) == 0);
-        printf("You should play the column %d\n",column);
+        printf("Player '%c' should play the column %d\n",disc,column);
     }   
 }
 //---------------------------------------------------------------//
@@ -381,7 +379,7 @@ void recommend_random_column(int column)
 // Exercise 8 was written by Ismayil Abdullazada
 void improve_advice(char disc)
 {
-    int left_horizontal, right_horizontal, up_vertical, right_up_diagonal, left_down_diagonal, left_up_diagonal, right_down_diagonal;
+    int left_horizontal=1, right_horizontal=1, up_vertical=1, right_up_diagonal=1, left_down_diagonal=1, left_up_diagonal=1, right_down_diagonal=1;
     for (int i = 0; i < ROWS; i++)
     {
         for (int j = 0; j < COLUMNS; j++)
@@ -409,7 +407,7 @@ void improve_advice(char disc)
                 {
                     if (j <= 2)
                         continue;
-                    else if (i == ROWS-1 && Board[i][j-2] == ' ' && (Board[i][j+3] == ' ' || Board[i][j+3] == disc))
+                    else if (i == ROWS-1 && Board[i][j-2] == ' ' && (Board[i][j-3] == disc || Board[i][j-3] == ' '))
                     {
                         left_horizontal = 2;
                         printf("Player %c should play the column %d\n",disc,j-1);
@@ -439,7 +437,7 @@ void improve_advice(char disc)
                 {
                     if (j >= 4)
                         continue;
-                    else if (i == ROWS-1 && Board[i][j+2] == ' ' && (Board[i][j+3] == ' ' || Board[i][j+3] == disc))
+                    else if (i == ROWS-1 && Board[i][j+2] == ' ' && (Board[i][j+3] == disc || Board[i][j+3] == ' '))
                     {
                         right_horizontal = 2;
                         printf("Player %c should play the column %d\n",disc,j+3);
@@ -549,50 +547,118 @@ void improve_advice(char disc)
             }
         }
     }
+    if (left_horizontal == 1 && right_horizontal == 1 && up_vertical == 1 && right_up_diagonal == 1 && left_down_diagonal == 1 && left_up_diagonal == 1 && right_down_diagonal == 1)
+        recommend_random_column(disc);
+}
+//---------------------------------------------------------------//
+
+// Exercise 9 was written by Nihat Babayev
+void computer_play()
+{
+    int column;
+    char disc = '*';
+    srand(time(0));
+    column = 1 + rand() % 7;
+    if (possible_play(column))
+    {
+        drop_disc(column,disc);
+    }
+    else
+    {
+        do
+        {
+            srand(time(0));
+            column = 1 + rand() % 7;
+        } while (!possible_play(column));
+        drop_disc(column,disc);
+    }   
 }
 //---------------------------------------------------------------//
 
 // The main function was written by Nijat Zeynalli
 int main(void)
 {
-    int column;
-    char disc;
-    printf("\nEnter the first player's disc: ");
-    scanf("%c",&disc); 
-    print_board();
-    printf("\n"); 
-    while (!Win())
-    {                
-        printf("Player '%c' enter the column between [1-7] where you want to mark: ",disc);
-        scanf("%d",&column);
-        printf("\n\n\n\n\n");
-        while (1)
+    char answer;
+    do
+    {
+        int column,choice;
+        char disc;
+        printf("Which one do you want to play? human vs human || human vs computer (answer by 1 or 2 respectively): ");
+        scanf("%d",&choice);
+        if (choice == 1)
         {
-            if(column < 1 || column > 7)
-            {
-                printf("Column %d doesn't exist. Player '%c' enter another column between [1-7] where you want to mark: ",column,disc);
+            printf("\nEnter the first player's disc: ");
+            scanf(" %c",&disc); 
+            print_board();
+            printf("\n"); 
+            while (!Win())
+            {                
+                printf("Player '%c' enter the column between [1-7] where you want to mark: ",disc);
                 scanf("%d",&column);
+                printf("\n");
+                while (1)
+                {
+                    if(column < 1 || column > 7)
+                    {
+                        printf("Column %d doesn't exist. Player '%c' enter another column between [1-7] where you want to mark: ",column,disc);
+                        scanf("%d",&column);
+                    }
+                    else
+                        break;
+                }
+                if (disc == '*')
+                {
+                    drop_disc(column,disc);
+                    disc = 'o';
+                    improve_advice(disc);
+                }
+                else
+                {
+                    drop_disc(column,disc);
+                    disc = '*';
+                    improve_advice(disc);
+                }
+                print_board();
+                printf("\n");
+                count_aligned_disc();
             }
-            else
+        }
+        else if (choice == 2)
+        {
+            print_board();
+            printf("\n"); 
+            while (!Win())
             {
-                break;
+                printf("Enter the column between [1-7] where you want to mark: ");
+                scanf("%d",&column);
+                printf("\n");
+                while (1)
+                {
+                    if(column < 1 || column > 7)
+                    {
+                        printf("Column %d doesn't exist. Enter another column between [1-7] where you want to mark: ",column);
+                        scanf("%d",&column);
+                    }
+                    else
+                        break;
+                }
+                disc = 'o';
+                drop_disc(column,disc);
+                print_board();
+                printf("\n");
+                if (Win())
+                    break;
+                if (disc == 'o')
+                    improve_advice(disc);
+                disc = '*';
+                computer_play(column);
+                print_board();
+                printf("\n");
             }
         }
-        if (disc == '*')
-        {
-            drop_disc(column,disc);
-            disc = 'o';
-            improve_advice(disc);
-        }
-        else
-        {
-            drop_disc(column,disc);
-            disc = '*';
-            improve_advice(disc);
-        }
-        print_board();
-        printf("\n");
-        count_aligned_disc();
-    }
+        printf("\nDo you want to play again (y or n): ");
+        scanf(" %c",&answer);
+        clear();
+    }   while (answer == 'y');
 }
 //---------------------------------------------------------------//
