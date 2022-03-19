@@ -459,7 +459,7 @@ void improve_advice(char disc)
                 }
                 else if (Board[i][j] == Board[i-1][j])
                 {
-                    if (up_vertical == 3)
+                    if (up_vertical == 3 || Board[i-2][j] != ' ')
                         continue;
                     up_vertical = 2;
                     printf("Player %c should play the column %d\n",disc,j+1);
