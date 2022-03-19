@@ -17,6 +17,7 @@
 // '*' represents the red discs
 // 'o' = represents the yellow discs
 
+//This 2d-array is the board
 char Board[ROWS][COLUMNS] = {
                             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
                             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -34,6 +35,8 @@ void clear()
     This function clears the Connect 4 Board.
     */
     char list_element = ' ';
+
+    //Everytime the game is finished, these loops clean the game board
     for (int row = 0; row < ROWS; row++)
     {
         for (int column = 0; column < COLUMNS; column++)
@@ -85,6 +88,7 @@ bool possible_play(int position)
         // valid move
         return true;
     }
+    //If player did not enter a valid column number, he/she will be warned to enter a correct one
     else
     {
         // invalid move 
@@ -247,6 +251,8 @@ bool horizWin()
     Checks if the player has 4 same disks in one horizontal line."""
     :returns: true or false
     */
+
+    //By using the indexes of the 2d-array for horizontal order this function determines whether anyone has won or not
     for (int row = 0; row < ROWS; row++)
     {
         for (int col = 0; col < 4; col++)
@@ -273,6 +279,7 @@ bool vertWin()
     :returns: true or false
     */
 
+    //By using the indexes of the 2d-array for vertical order this function determines whether anyone has won or not
     for (int row = 0; row < 3; row++)
     {
         for (int col = 0; col < COLUMNS; col++)
@@ -299,8 +306,9 @@ bool diagWin()
     :returns: true or false
     */
 
-    //check for starting position of diagonal
-    //going up and to the right
+    //The function checks all possible diagonal win conditions by increasing the column index and decreasing or increasing the row index
+
+    //check for starting position of diagonal by going up and to the right
     for (int row = 3; row < ROWS; row++)
     {
         for (int col = 0; col < 4; col++)
@@ -316,8 +324,7 @@ bool diagWin()
             }
         }
     }
-    //check for starting position of diagonal
-    //going down and to right
+    //check for starting position of diagonal by going down and to right
     for (int row = 0; row < 3; row++)
     {
         for (int col = 0; col < 4; col++)
@@ -379,6 +386,7 @@ void recommend_random_column(char disc)
 // Exercise 8 was written by Ismayil Abdullazada
 void improve_advice(char disc)
 {
+    //This function gives advice for both players, when they have both 2 or 3 aligned discs
     int left_horizontal=1, right_horizontal=1, up_vertical=1, right_up_diagonal=1, left_down_diagonal=1, left_up_diagonal=1, right_down_diagonal=1;
     for (int i = 0; i < ROWS; i++)
     {
@@ -555,6 +563,7 @@ void improve_advice(char disc)
 // Exercise 9 was written by Nihat Babayev
 void computer_play()
 {
+    //This function makes computer play versus human
     int column;
     char disc = '*';
     srand(time(0));
@@ -583,6 +592,7 @@ int main(void)
     {
         int column,choice;
         char disc;
+        //In this part user selects to play versus another player or computer
         printf("Which one do you want to play? human vs human || human vs computer (answer by 1 or 2 respectively): ");
         scanf("%d",&choice);
         if (choice == 1)
