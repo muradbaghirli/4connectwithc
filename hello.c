@@ -10,7 +10,7 @@
 char list_element = ' ';
 
 // "*" represents the red discs
-// "o" = represents the yellow discs
+// "o" represents the yellow discs
 
 
 // The Connect 4 Board written by Nijat Zeynalli
@@ -22,7 +22,7 @@ char Board[ROWS][COLUMNS] = {
                             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
                             {' ', ' ', ' ', ' ', ' ', ' ', ' '}
                             };
-
+//This matrix is the board
 
 
 
@@ -30,10 +30,11 @@ char Board[ROWS][COLUMNS] = {
 void clear(char Board[ROWS][COLUMNS])
 {
     /*
-    This function clears the Connect 4 Board.
-    : returns: the empty Connect 4 Board.
+    This function clears the Connect 4 Board
+    : returns: the empty Connect 4 Board
     */
 
+    //Everytime the game is finished, this function returns the clean board
     for (int row = 0; row < ROWS; row++)
     {
         for (int column = 0; column < COLUMNS; column++)
@@ -50,7 +51,7 @@ void clear(char Board[ROWS][COLUMNS])
 void print_board(char Board[ROWS][COLUMNS])
 {
     /*
-    This function prints Connect 4 Board.
+    This displays prints Connect 4 Board
     :returns: printed Connect 4 Board
     */
     int rows_left = 6;
@@ -71,6 +72,8 @@ void print_board(char Board[ROWS][COLUMNS])
         rows_right--;
     }
     printf("  1 2 3 4 5 6 7");
+
+    
 }
 
 
@@ -78,7 +81,7 @@ void print_board(char Board[ROWS][COLUMNS])
 bool possible_play(char Board[ROWS][COLUMNS], int position)
 {
     /*
-    This function checks whether the the column player entered is valid or not.
+    This function checks whether the the column player entered is valid or not
     : param position: the chosen place to put the disk
     : type position: int 
     : returns: True if the player can put his disk there or False if not
@@ -118,14 +121,15 @@ void drop_disc(char Board[ROWS][COLUMNS], int column, char disc)
                 break;
             }
         }
-
+        //If player did not enter a valid column number, he/she will be warned to enter a correct one
         else
         {
             printf("Column %d has filled. Please enter another number.",column);
             printf("Enter the column between [1-7] where you want to mark : ");
             scanf("%d",&column);
             printf("\n");
-            drop_disc(Board,column,disc);
+
+            drop_disc(Board,column,disc); 
             break;
         }
     }
@@ -141,6 +145,8 @@ bool horizWin(char Board[ROWS][COLUMNS])
     :returns: True or False
     */
 
+
+    //By using the indexes of the matrix for horizontal order this function determines whether has won or not 
     for (int row = 0; row < ROWS; row++)
     {
         for (int col = 0; col < 4; col++)
@@ -148,7 +154,7 @@ bool horizWin(char Board[ROWS][COLUMNS])
             if (Board[row][col] != ' ')
             {
                 if (Board[row][col] == Board[row][col+1] && Board[row][col] == Board[row][col+2] && Board[row][col] == Board[row][col+3])
-                {
+                {   
                    printf("\n");
                    printf("Player %c has won the game!",Board[row][col]);
                    printf("\n");
@@ -170,6 +176,7 @@ bool vertWin(char Board[ROWS][COLUMNS])
     :returns: True or False
     */
 
+    //By using the indexes of the matrix for vertical order this function determines whether has won or not 
     for (int row = 0; row < 3; row++)
     {
         for (int col = 0; col < COLUMNS; col++)
@@ -199,8 +206,9 @@ bool diagWin(char Board[ROWS][COLUMNS])
     :returns: True or False
     */
 
-    //check for starting position of diagonal
-    //going up and to the right
+    //Checks for starting position of diagonal going up and to the right
+
+    //The fucntion checks everything by increasing the column index and decreasing or increasing the row index 
     for (int row = 3; row < ROWS; row++)
     {
         for (int col = 0; col < 4; col++)
@@ -258,7 +266,7 @@ bool Win()
     return false;
 }
 
-
+//Written by Ismayil Abdullazada
 void recommend_column(char Board[ROWS][COLUMNS], int column)
 {
     column = 1 + rand() % 7;
@@ -278,7 +286,7 @@ void recommend_column(char Board[ROWS][COLUMNS], int column)
 
 
 
-//Written by Ismayil Abdullazada, Nihat Babayev
+//Written by Ismayil Abdullazada, Nihat Babayev, Murad Baghirli, Nijat Zeynalli
 void count_aligned_disc(char Board[ROWS][COLUMNS])
 {
     int left_horizontal, right_horizontal, up_vertical, right_up_diagonal, left_down_diagonal, left_up_diagonal, right_down_diagonal;
@@ -294,96 +302,96 @@ void count_aligned_disc(char Board[ROWS][COLUMNS])
                     if (j <= 1)
                         continue;
                     left_horizontal = 3;
-                    //printf("box (%d,%d) corresponds to an alignment of %d discs left horizontally.\n",j+1,row_number,left_horizontal);
+                    
                 }
                 else if (Board[i][j] == Board[i][j+1] && Board[i][j+1] == Board[i][j+2])
                 {
                     if (j >= 5)
                         continue;
                     right_horizontal = 3;
-                    //printf("box (%d,%d) corresponds to an alignment of %d discs right horizontally.\n",j+1,row_number,right_horizontal);
+                    
                 }
                 else if (Board[i][j] == Board[i-1][j] && Board[i-1][j] == Board[i-2][j])
                 {
                     up_vertical = 3;
-                    //printf("box (%d,%d) corresponds to an alignment of %d discs up vertically.\n",j+1,row_number,up_vertical);
+                   
                 }
                 else if (Board[i][j] == Board[i-1][j+1] && Board[i-1][j+1] == Board[i-2][j+2])
                 {
                     if (j >= 5)
                         continue;
                     right_up_diagonal = 3;
-                    //printf("box (%d,%d) corresponds to an alignment of %d discs right up diagonally.\n",j+1,row_number,right_up_diagonal);
+                    
                 }
                 else if (Board[i][j] == Board[i+1][j-1] && Board[i+1][j-1] == Board[i+2][j-2])
                 {
                     if (j <= 1)
                         continue;
                     left_down_diagonal = 3;
-                    //printf("box (%d,%d) corresponds to an alignment of %d discs left down diagonally.\n",j+1,row_number,left_down_diagonal);
+                    
                 }
                 else if (Board[i][j] == Board[i-1][j-1] && Board[i-1][j-1] == Board[i-2][j-2])
                 {
                     if (j <= 1)
                         continue;
                     left_up_diagonal = 3;
-                    //printf("box (%d,%d) corresponds to an alignment of %d discs left up diagonally.\n",j+1,row_number,left_up_diagonal);
+                    
                 }
                 else if (Board[i][j] == Board[i+1][j+1] && Board[i+1][j+1] == Board[i+2][j+2])
                 {
                     if (j >= 5)
                         continue;
                     right_down_diagonal = 3;
-                    //printf("box (%d,%d) corresponds to an alignment of %d discs right down diagonally.\n",j+1,row_number,right_down_diagonal);
+                    
                 }
                 else if (Board[i][j] == Board[i][j-1])
                 {
                     if (left_horizontal == 3 || j == 0)
                         continue;
                     left_horizontal = 2;
-                    //printf("box (%d,%d) corresponds to an alignment of %d discs left horizontally.\n",j+1,row_number,left_horizontal);
+                    
                 }
                 else if (Board[i][j] == Board[i][j+1])
                 {
                     if (right_horizontal == 3 || j == 5)
                         continue;
                     right_horizontal = 2;
-                    //printf("box (%d,%d) corresponds to an alignment of %d discs right horizontally.\n",j+1,row_number,right_horizontal);
+                    
                 }
                 else if (Board[i][j] == Board[i-1][j])
                 {
                     if (up_vertical == 3)
                         continue;
                     up_vertical = 2;
-                    //printf("box (%d,%d) corresponds to an alignment of %d discs up vertically.\n",j+1,row_number,up_vertical);
+                    
                 }
                 else if (Board[i][j] == Board[i+1][j-1])
                 {
                     if (left_down_diagonal == 3 || j == 0)
                         continue;
                     left_down_diagonal = 2;
-                    //printf("box (%d,%d) corresponds to an alignment of %d discs left down diagonally.\n",j+1,row_number,left_down_diagonal);
+                    
                 }
                 else if (Board[i][j] == Board[i-1][j-1])
                 {
                     if (left_up_diagonal == 3 || j == 0)
                         continue;
                     left_up_diagonal = 2;
-                    //printf("box (%d,%d) corresponds to an alignment of %d discs left up diagonally.\n",j+1,row_number,left_up_diagonal);
+                    
                 }
                 else if (Board[i][j] == Board[i-1][j+1])
                 {
                     if (right_up_diagonal == 3 || j == 5)
                         continue;
                     right_up_diagonal = 2;
-                    //printf("box (%d,%d) corresponds to an alignment of %d discs right up diagonally.\n",j+1,row_number,right_up_diagonal);
+                    
                 }
                 else if (Board[i][j] == Board[i+1][j+1])
                 {
                     if (right_down_diagonal == 3 || j == 5)
                         continue;
                     right_down_diagonal = 2;
-                    //printf("box (%d,%d) corresponds to an alignment of %d discs right down diagonally.\n",j+1,row_number,right_down_diagonal);
+                    
                 }
             }
         }
@@ -391,9 +399,10 @@ void count_aligned_disc(char Board[ROWS][COLUMNS])
 }
 
 
-//Written by Murad Baghirli, Nijat Zeynalli
+//Written by Ismayil Abdullazada
 void improve_advice(char Board[ROWS][COLUMNS], char disc)
 {
+    //this function gives advice for both players, when they have both 2 or 3 aligned discs
     int left_horizontal, right_horizontal, up_vertical, right_up_diagonal, left_down_diagonal, left_up_diagonal, right_down_diagonal;
     for (int i = 0; i < ROWS; i++)
     {
@@ -512,10 +521,13 @@ int ra()
 {
     srand(time(0));
     int rn = rand()% 7 + 1;
+    //random depends on time so that it generates a different number each time
 
     return rn;
 }
 
+
+//function that makes computer play vs human
 void computer(char Board[ROWS][COLUMNS], int column, char disc)
 {
     for (int row = ROWS-1; row > -1; row--)
@@ -532,16 +544,20 @@ void computer(char Board[ROWS][COLUMNS], int column, char disc)
 }
 
 
-//The main function
+//The main function written by Ismayil Abdullazada, Nihat Babayev, Murad Baghirli, Nijat Zeynalli
 int main(void)
 {
     int column,choice;
-    char disc;
-    printf("Which type of game do you want?\n1.computer vs human\n2.human vs human(1 or 2)\n");
+    char disc,disc2;
+
+    //in this part user selects to play vs another player or computer
+    printf("Which type of game do you want? Computer vs human(1) or human vs human(2): ");
     scanf("%d",&choice);
+
     if (choice==2){
     printf("Enter the first player's disc: ");
     scanf(" %c",&disc);  
+
     while (!Win())
     {                 
         printf("\nPlayer '%c' enter the column between [1-7] where you want to mark: ",disc);
@@ -568,22 +584,30 @@ int main(void)
             drop_disc(Board,column,disc);
             disc = '*';
         }
+        
         print_board(Board);
         printf("\n");
         count_aligned_disc(Board);
         improve_advice(Board,disc);
+
     }
     }
 
 
     else if (choice==1){
-
-    printf("Enter your disc(* or o): ");
-    scanf(" %c",&disc);  
+    printf("Your disc is *\n");
+    disc='o';
+    char player_disc=disc;
+    disc2='*';
+    disc=disc2;
+    
     while (!Win())
-    {                 
-        printf("\nEnter the column between [1-7] where you want to mark: ");
+    {   
+        if(disc==disc2)
+    {         
+        printf("Enter the column between [1-7] where you want to mark: ");
         scanf("%d",&column);
+    }
         while (1)
         {
             if(column<1 || column>7)
@@ -596,36 +620,26 @@ int main(void)
                 break;
             }
         }
-        if(disc=='*'){
-        if (disc == '*')
+        if (player_disc==disc)
         {
-            drop_disc(Board,column,disc);
-            disc = 'o';
+            computer(Board, ra(), disc);
+            disc=disc2;
+
         }
         else
         {
-            int a=ra();
-            computer(Board,a, disc);
-            disc = '*';
+            drop_disc(Board,column,disc);
+            disc = player_disc;
+            
+            
         }
+
         print_board(Board);
+        printf("\n");
+        count_aligned_disc(Board);
+        /* if(disc==disc2)
+        improve_advice(Board,disc); */
     }
-    if(disc=='o'){
-        if (disc == '*')
-        {
-            int a=ra();
-            computer(Board,a,disc);
-            disc = 'o';
-        }
-        else
-        {
-            drop_disc(Board,column,disc);
-            disc = '*';
-        }
-        
     }
-    printf("\n");
-    print_board(Board);
-    }
-}
+    
 }
