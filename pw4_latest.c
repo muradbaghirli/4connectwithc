@@ -3,7 +3,7 @@
 #include <time.h>
 #include <stdlib.h>
 
-//Group: Ismayil Abdullazada, Nihat Babayev, Murad Baghirli, Nijat Zeynalli
+
 
 #define ROWS 6
 #define COLUMNS 7
@@ -13,7 +13,6 @@ char list_element = ' ';
 // "o" = represents the yellow discs
 
 
-// The Connect 4 Board written by Nijat Zeynalli
 char Board[ROWS][COLUMNS] = {
                             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
                             {' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -24,9 +23,6 @@ char Board[ROWS][COLUMNS] = {
                             };
 
 
-
-
-//Board cleaning function written by Nihat Babayev
 void clear(char Board[ROWS][COLUMNS])
 {
     /*
@@ -74,7 +70,6 @@ void print_board(char Board[ROWS][COLUMNS])
 }
 
 
-//Validity function written by Murad Baghirli
 bool possible_play(char Board[ROWS][COLUMNS], int position)
 {
     /*
@@ -97,7 +92,6 @@ bool possible_play(char Board[ROWS][COLUMNS], int position)
 }
 
 
-//Written by Ismayil Abdullazada
 void drop_disc(char Board[ROWS][COLUMNS], int column, char disc)
 {
     /* This function drops the player's disc into the grid.
@@ -132,8 +126,6 @@ void drop_disc(char Board[ROWS][COLUMNS], int column, char disc)
 }
 
 
-
-//Written by Nihat Babayev
 bool horizWin(char Board[ROWS][COLUMNS])
 {
     /*
@@ -162,7 +154,6 @@ bool horizWin(char Board[ROWS][COLUMNS])
 }
 
 
-//Written by Ismayil Abdullazada
 bool vertWin(char Board[ROWS][COLUMNS])
 {
     /*
@@ -191,7 +182,6 @@ bool vertWin(char Board[ROWS][COLUMNS])
 }
 
 
-//Written by Ismayil Abdullazada, Murad Baghirli, Nijat Zeynalli, Nihat Babayev
 bool diagWin(char Board[ROWS][COLUMNS])
 {
     /*
@@ -242,8 +232,6 @@ bool diagWin(char Board[ROWS][COLUMNS])
 }
 
 
-
-//Written by Ismayil Abdullazada
 bool Win()
 {
     /*
@@ -277,8 +265,6 @@ void recommend_column(char Board[ROWS][COLUMNS], int column)
 }
 
 
-
-//Written by Ismayil Abdullazada, Nihat Babayev
 void count_aligned_disc(char Board[ROWS][COLUMNS])
 {
     int left_horizontal, right_horizontal, up_vertical, right_up_diagonal, left_down_diagonal, left_up_diagonal, right_down_diagonal;
@@ -391,7 +377,6 @@ void count_aligned_disc(char Board[ROWS][COLUMNS])
 }
 
 
-//Written by Murad Baghirli, Nijat Zeynalli
 void improve_advice(char Board[ROWS][COLUMNS], char disc)
 {
     int left_horizontal, right_horizontal, up_vertical, right_up_diagonal, left_down_diagonal, left_up_diagonal, right_down_diagonal;
